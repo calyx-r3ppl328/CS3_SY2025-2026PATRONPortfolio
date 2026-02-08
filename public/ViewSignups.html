@@ -1,69 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Show List of Students Who Signed-Up</title>
-  <link rel="stylesheet" href="signups.css">
+    <meta charset="UTF-8">
+    <title>View Signups</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; }
+        th { background: black; color: white; padding: 10px; }
+        td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+        .no-data { border: 1px solid #333; padding: 10px; margin-top: 10px; }
+    </style>
 </head>
 <body>
+    <h1>Show List of Students Who Signed-Up</h1>
+    <p>by Calyx Pierre C. Patron </p>
+    
+    <a href="Q3_3GMagnesiumPatron.html">Back to Signup</a><br><br>
+    
+    <label>Select Your Club: 
+        <select id="clubFilter" onchange="renderTable()">
+            <option value="">-- Select Organization --</option>
+                <option value="AKSIS">AKSIS</option>
+                <option value="Alianti">Alianti</option>
+                <option value="AstroSoc">AstroSoc</option>
+                <option value="Bake Club">Bake Club</option>
+                <option value="Bravura">Bravura</option>
+                <option value="Celluloid">Celluloid</option>
+                <option value="Computron">Computron</option>
+                <option value="Intyale">Intyale</option>
+                <option value="Invictus">Invictus</option>
+                <option value="Kamalayan">Kamalayan</option>
+                <option value="Kislap">Kislap</option>
+                <option value="Munhwa">Munhwa</option>
+                <option value="Pisay.XYZ">Pisay.XYZ</option>
+                <option value="SCA">SCA</option>
+                <option value="Sigasig">Sigasig</option>
+                <option value="Volant">Volant</option>
+                <option value="ACTS">ACTS</option>
+                <option value="ATOM">ATOM</option>
+                <option value="CARE">CARE</option>
+                <option value="Ellipsis">Ellipsis</option>
+                <option value="Exposure">Exposure</option>
+                <option value="Labuyo">Labuyo</option>
+                <option value="Loqui">Loqui</option>
+                <option value="Pallastro">Pallastro</option>
+                <option value="Polvere">Polvere</option>
+                <option value="PYHS">PYHS</option>
+                <option value="Sapienara">Sapienara</option>
+                <option value="SARS+">SARS+</option>
+                <option value="Sightlines">Sightlines</option>
+                <option value="Tomorrow">Tomorrow</option>
+                <option value="Flux">Flux</option>
+                <option value="Animo">Animo</option>
+                <option value="YVS">YVS</option>
+                <option value="Likha">Likha</option>
+                <option value="Karyo Biomedical Society">Karyo Biomedical Society</option>
+                <option value="PSHS-MC MUN">PSHS-MC MUN</option>
+                <option value="Sagala">Sagala</option>
+                <option value="Math Club">Math Club</option>
+                <option value="Himig Agham">Himig Agham</option>
+        </select>
+    </label>
 
-  <h1>Show List of Students Who Signed-Up</h1>
-  <p>by Calyx Patron</p>
+    <p>Total Signup: <span id="totalCount">0</span></p>
 
-  <a href="signup.html">Back to Signup</a>
+    <div id="tableContainer"></div>
 
-  <label>
-    Select Your Club
-    <select id="clubFilter">
-      <option value="all">-- select an option --</option>
-  
-      <option value="AKSIS">AKSIS</option>
-      <option value="Alianti">Alianti</option>
-      <option value="AstroSoc">AstroSoc</option>
-      <option value="Bake Club">Bake Club</option>
-      <option value="Bravura">Bravura</option>
-      <option value="Celluloid">Celluloid</option>
-      <option value="Computron">Computron</option>
-      <option value="Intyale">Intyale</option>
-      <option value="Invictus">Invictus</option>
-      <option value="Kamalayan">Kamalayan</option>
-      <option value="Kislap">Kislap</option>
-      <option value="Munhwa">Munhwa</option>
-      <option value="Pisay.XYZ">Pisay.XYZ</option>
-      <option value="SCA">SCA</option>
-      <option value="Sigasig">Sigasig</option>
-      <option value="Volant">Volant</option>
-      <option value="ACTS">ACTS</option>
-      <option value="ATOM">ATOM</option>
-      <option value="CARE">CARE</option>
-      <option value="Ellipsis">Ellipsis</option>
-      <option value="Exposure">Exposure</option>
-      <option value="Labuyo">Labuyo</option>
-      <option value="Loqui">Loqui</option>
-      <option value="Pallastro">Pallastro</option>
-      <option value="Polvere">Polvere</option>
-      <option value="PYHS">PYHS</option>
-      <option value="Sapienara">Sapienara</option>
-      <option value="SARS+">SARS+</option>
-      <option value="Sightlines">Sightlines</option>
-      <option value="Tomorrow">Tomorrow</option>
-      <option value="Flux">Flux</option>
-      <option value="Animo">Animo</option>
-      <option value="YVS">YVS</option>
-      <option value="Likha">Likha</option>
-      <option value="Karyo Biomedical Society">Karyo Biomedical Society</option>
-      <option value="PSHS-MC MUN">PSHS-MC MUN</option>
-      <option value="Sagala">Sagala</option>
-      <option value="Math Club">Math Club</option>
-      <option value="Himig Agham">Himig Agham</option>
-    </select>
-  </label>
-  
+    <script>
+        function renderTable() {
+          const filter = document.getElementById('clubFilter').value;
+          const container = document.getElementById('tableContainer');
+    
+          const signups = JSON.parse(localStorage.getItem('clubSignups')) || [];
+    
+          const filteredData = (filter === "" || filter === "ALL") 
+            ? signups 
+            : signups.filter(s => s.club === filter);
 
-  <p id="totalSignup">Total Signup : 0</p>
+          document.getElementById('totalCount').innerText = filteredData.length;
 
-  <div id="tableContainer"></div>
+          if (filteredData.length === 0) {
+            container.innerHTML = '<div class="no-data">No Sign Ups for the club</div>';
+          return;
+          }
 
-  <script src="signups.js"></script>
+          let html = `<table>
+            <tr>
+              <th>Club</th><th>ID</th><th>Fullname</th><th>Grade</th><th>Email</th><th>Mobile</th><th>Intern|Extern</th>
+            </tr>`;
+    
+          filteredData.forEach(s => {
+            html += `<tr>
+              <td>${s.club}</td>
+              <td>${s.student_id}</td>
+              <td>${s.full_name}</td>
+              <td>${s.grade_level}</td>
+              <td>${s.email}</td>
+              <td>${s.mobile}</td>
+              <td>${s.status === 'int' ? 'Intern' : 'Extern'}</td>
+          </tr>`;
+          });
+    
+          html += `</table>`;
+          container.innerHTML = html;
+        }
+
+        window.onload = renderTable;
+    </script>
 </body>
 </html>
