@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Move Rating</title>
+
+        <style>
+            body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            padding: 20px;
+            }
+
+            form {
+                max-width: 700px;
+                margin: auto;
+                background: #ffffff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            }
+    
+            fieldset {
+                margin-bottom: 20px;
+                border: 2px solid #ccc;
+                padding: 15px;
+            }
+
+            legend {
+                font-weight: bold;
+                padding: 0 10px;
+            }
+
+            label {
+                display: block;
+                margin-bottom: 10px;
+            }
+
+            input, select, textarea {
+                width: 100%;
+                padding: 8px;
+                margin-top: 5px;
+                border: 1px solid #aaa;
+                border-radius: 4px;
+            }
+
+            textarea {
+                resize: vertical;
+                height: 100px;
+            }
+
+            input:focus, select:focus, textarea:focus {
+                outline: none;
+                border-color: #0077cc;
+                background-color: #eef6ff;
+            }
+
+            .invalid {
+                border: 2px solid red;
+                background-color: #ffe6e6;
+            }
+
+            .buttons {
+                text-align: center;
+            }
+
+            button {
+                padding: 10px 20px;
+                margin: 10px;
+                font-size: 16px;
+                cursor: pointer;
+            }
+        </style>
+
+        <script>
+            function confirmSubmit() {
+            if (confirm("Are you sure you want to submit this application?")) {
+        
+                const form = document.querySelector('form');
+                const formData = new FormData(form);
+                const signupEntry = Object.fromEntries(formData.entries());
+
+                let signups = JSON.parse(localStorage.getItem('clubSignups')) || [];
+        
+                signups.push(signupEntry);
+        
+                localStorage.setItem('clubSignups', JSON.stringify(signups));
+
+                alert("Signup saved successfully!");
+                form.reset(); 
+                return false;
+            }
+            return false;
+        }
+
+        function viewSignups() {
+        window.location.href = "viewSignUps.html";
+        }
+        </script>
+    </head>
+
+    <body>
+
+    <form id="form" method="post" onsubmit="return confirmSubmit();" onreset="return confirmReset();">
+
+        <fieldset>
+            <legend>Add a Movie!</legend>
+
+            <label>
+                Title
+                <input type="text" name="student_id" required onblur="checkEmpty(this)">
+            </label>
+
+            <label>
+                Year:
+                <input type="number" name="full_name" required onblur="checkEmpty(this)">
+            </label>
+
+            <label>
+                Genre:
+                <input type="date" name="birthday" required>
+            </label>
+
+            <label>
+                Email Address:
+                <input type="email" name="email" required onblur="checkEmpty(this)">
+            </label>
+        </fieldset>
+
+        <fieldset>
+            <legend>Application Details</legend>
+
+            <label>
+                Mobile Phone:
+                <input type="text" name="mobile" required onblur="checkEmpty(this)">
+            </label>
+
+            <label>
+                Grade Level:
+                <select name="grade_level" required>
+                    <option value="">-- Select Grade --</option>
+                    <option value="g7">Grade 7</option>
+                    <option value="g8">Grade 8</option>
+                    <option value="g9">Grade 9</option>
+                    <option value="g10">Grade 10</option>
+                    <option value="g11">Grade 11</option>
+                    <option value="g12">Grade 12</option>
+            </select>
+        </label>
+
+        <label>
+            Intern / Extern:
+            <input type="radio" name="status" value="int" required> Intern
+            <input type="radio" name="status" value="ext"> Extern
+        </label>
+
+        <label>
+            Preferred Organization / Club:
+            <select name="club" required>
+                <option value="">-- Select Organization --</option>
+                <option value="AKSIS">AKSIS</option>
+                <option value="Alianti">Alianti</option>
+                <option value="AstroSoc">AstroSoc</option>
+                <option value="Bake Club">Bake Club</option>
+                <option value="Bravura">Bravura</option>
+                <option value="Celluloid">Celluloid</option>
+                <option value="Computron">Computron</option>
+                <option value="Intyale">Intyale</option>
+                <option value="Invictus">Invictus</option>
+                <option value="Kamalayan">Kamalayan</option>
+                <option value="Kislap">Kislap</option>
+                <option value="Munhwa">Munhwa</option>
+                <option value="Pisay.XYZ">Pisay.XYZ</option>
+                <option value="SCA">SCA</option>
+                <option value="Sigasig">Sigasig</option>
+                <option value="Volant">Volant</option>
+                <option value="ACTS">ACTS</option>
+                <option value="ATOM">ATOM</option>
+                <option value="CARE">CARE</option>
+                <option value="Ellipsis">Ellipsis</option>
+                <option value="Exposure">Exposure</option>
+                <option value="Labuyo">Labuyo</option>
+                <option value="Loqui">Loqui</option>
+                <option value="Pallastro">Pallastro</option>
+                <option value="Polvere">Polvere</option>
+                <option value="PYHS">PYHS</option>
+                <option value="Sapienara">Sapienara</option>
+                <option value="SARS+">SARS+</option>
+                <option value="Sightlines">Sightlines</option>
+                <option value="Tomorrow">Tomorrow</option>
+                <option value="Flux">Flux</option>
+                <option value="Animo">Animo</option>
+                <option value="YVS">YVS</option>
+                <option value="Likha">Likha</option>
+                <option value="Karyo Biomedical Society">Karyo Biomedical Society</option>
+                <option value="PSHS-MC MUN">PSHS-MC MUN</option>
+                <option value="Sagala">Sagala</option>
+                <option value="Math Club">Math Club</option>
+                <option value="Himig Agham">Himig Agham</option>
+            </select>
+        </label>
+
+        <label>
+            Why do you want to join:
+            <textarea name="reason" required onblur="checkEmpty(this)"></textarea>
+        </label>
+    </fieldset>
+
+    <input type="checkbox" class="rememberMe" id="rememberMe">
+    <label for="rememberMe"> Remember Me </label>
+
+    <div class="buttons">
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+    </div>
+
+    <a href="ViewSignups.html"> View Signups </a>
+
+</form>
+
+</body>
+</html>
