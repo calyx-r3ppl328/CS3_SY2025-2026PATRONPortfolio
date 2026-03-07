@@ -1,222 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Move Rating</title>
-
-        <style>
-            body {
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a Movie</title>
+    <style>
+        body {
             font-family: Arial, sans-serif;
-            background: #f4f4f4;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
             padding: 20px;
-            }
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+        .form-group {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        /* Star Rating Styles */
+        .stars-container {
+            font-size: 24px;
+            cursor: pointer;
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+        .star.selected {
+            color: #ffcc00;
+        }
+        .list-star {
+            color: #ffcc00;
+            font-size: 16px;
+        }
+        .gray-star {
+            color: #ccc;
+            font-size: 16px;
+        }
 
-            form {
-                max-width: 700px;
-                margin: auto;
-                background: #ffffff;
-                padding: 20px;
-                border-radius: 8px;
-                box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            }
+        button {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #movieList {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .movie-item {
+            border: 1px solid #eee;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background: #fafafa;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Add a Movie</h2>
     
-            fieldset {
-                margin-bottom: 20px;
-                border: 2px solid #ccc;
-                padding: 15px;
-            }
-
-            legend {
-                font-weight: bold;
-                padding: 0 10px;
-            }
-
-            label {
-                display: block;
-                margin-bottom: 10px;
-            }
-
-            input, select, textarea {
-                width: 100%;
-                padding: 8px;
-                margin-top: 5px;
-                border: 1px solid #aaa;
-                border-radius: 4px;
-            }
-
-            textarea {
-                resize: vertical;
-                height: 100px;
-            }
-
-            input:focus, select:focus, textarea:focus {
-                outline: none;
-                border-color: #0077cc;
-                background-color: #eef6ff;
-            }
-
-            .invalid {
-                border: 2px solid red;
-                background-color: #ffe6e6;
-            }
-
-            .buttons {
-                text-align: center;
-            }
-
-            button {
-                padding: 10px 20px;
-                margin: 10px;
-                font-size: 16px;
-                cursor: pointer;
-            }
-        </style>
-
-        <script>
-            function confirmSubmit() {
-            if (confirm("Are you sure you want to submit this application?")) {
-        
-                const form = document.querySelector('form');
-                const formData = new FormData(form);
-                const signupEntry = Object.fromEntries(formData.entries());
-
-                let signups = JSON.parse(localStorage.getItem('clubSignups')) || [];
-        
-                signups.push(signupEntry);
-        
-                localStorage.setItem('clubSignups', JSON.stringify(signups));
-
-                alert("Signup saved successfully!");
-                form.reset(); 
-                return false;
-            }
-            return false;
-        }
-
-        function viewSignups() {
-        window.location.href = "viewSignUps.html";
-        }
-        </script>
-    </head>
-
-    <body>
-
-    <form id="form" method="post" onsubmit="return confirmSubmit();" onreset="return confirmReset();">
-
-        <fieldset>
-            <legend>Add a Movie!</legend>
-
-            <label>
-                Title
-                <input type="text" name="student_id" required onblur="checkEmpty(this)">
-            </label>
-
-            <label>
-                Year:
-                <input type="number" name="full_name" required onblur="checkEmpty(this)">
-            </label>
-
-            <label>
-                Genre:
-                <input type="date" name="birthday" required>
-            </label>
-
-            <label>
-                Email Address:
-                <input type="email" name="email" required onblur="checkEmpty(this)">
-            </label>
-        </fieldset>
-
-        <fieldset>
-            <legend>Application Details</legend>
-
-            <label>
-                Mobile Phone:
-                <input type="text" name="mobile" required onblur="checkEmpty(this)">
-            </label>
-
-            <label>
-                Grade Level:
-                <select name="grade_level" required>
-                    <option value="">-- Select Grade --</option>
-                    <option value="g7">Grade 7</option>
-                    <option value="g8">Grade 8</option>
-                    <option value="g9">Grade 9</option>
-                    <option value="g10">Grade 10</option>
-                    <option value="g11">Grade 11</option>
-                    <option value="g12">Grade 12</option>
-            </select>
-        </label>
-
-        <label>
-            Intern / Extern:
-            <input type="radio" name="status" value="int" required> Intern
-            <input type="radio" name="status" value="ext"> Extern
-        </label>
-
-        <label>
-            Preferred Organization / Club:
-            <select name="club" required>
-                <option value="">-- Select Organization --</option>
-                <option value="AKSIS">AKSIS</option>
-                <option value="Alianti">Alianti</option>
-                <option value="AstroSoc">AstroSoc</option>
-                <option value="Bake Club">Bake Club</option>
-                <option value="Bravura">Bravura</option>
-                <option value="Celluloid">Celluloid</option>
-                <option value="Computron">Computron</option>
-                <option value="Intyale">Intyale</option>
-                <option value="Invictus">Invictus</option>
-                <option value="Kamalayan">Kamalayan</option>
-                <option value="Kislap">Kislap</option>
-                <option value="Munhwa">Munhwa</option>
-                <option value="Pisay.XYZ">Pisay.XYZ</option>
-                <option value="SCA">SCA</option>
-                <option value="Sigasig">Sigasig</option>
-                <option value="Volant">Volant</option>
-                <option value="ACTS">ACTS</option>
-                <option value="ATOM">ATOM</option>
-                <option value="CARE">CARE</option>
-                <option value="Ellipsis">Ellipsis</option>
-                <option value="Exposure">Exposure</option>
-                <option value="Labuyo">Labuyo</option>
-                <option value="Loqui">Loqui</option>
-                <option value="Pallastro">Pallastro</option>
-                <option value="Polvere">Polvere</option>
-                <option value="PYHS">PYHS</option>
-                <option value="Sapienara">Sapienara</option>
-                <option value="SARS+">SARS+</option>
-                <option value="Sightlines">Sightlines</option>
-                <option value="Tomorrow">Tomorrow</option>
-                <option value="Flux">Flux</option>
-                <option value="Animo">Animo</option>
-                <option value="YVS">YVS</option>
-                <option value="Likha">Likha</option>
-                <option value="Karyo Biomedical Society">Karyo Biomedical Society</option>
-                <option value="PSHS-MC MUN">PSHS-MC MUN</option>
-                <option value="Sagala">Sagala</option>
-                <option value="Math Club">Math Club</option>
-                <option value="Himig Agham">Himig Agham</option>
-            </select>
-        </label>
-
-        <label>
-            Why do you want to join:
-            <textarea name="reason" required onblur="checkEmpty(this)"></textarea>
-        </label>
-    </fieldset>
-
-    <input type="checkbox" class="rememberMe" id="rememberMe">
-    <label for="rememberMe"> Remember Me </label>
-
-    <div class="buttons">
-        <button type="submit">Submit</button>
-        <button type="reset">Reset</button>
+    <div class="form-group">
+        <label>Title:</label>
+        <input type="text" id="movieTitle">
     </div>
 
-    <a href="ViewSignups.html"> View Signups </a>
+    <div class="form-group">
+        <label>Year:</label>
+        <input type="number" id="movieYear">
+    </div>
 
-</form>
+    <div class="form-group">
+        <label>Genre:</label>
+        <select id="movieGenre">
+            <option value="Action">Action</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Drama">Drama</option>
+            <option value="Sci-Fi">Sci-Fi</option>
+            <option value="Horror">Horror</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Rating:</label>
+        <div class="stars-container" id="starRating">
+            <span class="star" data-value="1">★</span>
+            <span class="star" data-value="2">★</span>
+            <span class="star" data-value="3">★</span>
+            <span class="star" data-value="4">★</span>
+            <span class="star" data-value="5">★</span>
+        </div>
+    </div>
+
+    <button id="addMovieBtn">Add Movie</button>
+
+    <hr>
+    <h2>Movie List</h2>
+    <div id="movieList"></div>
+</div>
+
+<script>
+    const stars = document.querySelectorAll('.star');
+    let currentRating = 0;
+
+    // 1. Star Selection Logic
+    stars.forEach(star => {
+        star.addEventListener('click', () => {
+            currentRating = star.getAttribute('data-value');
+            updateStarDisplay(currentRating);
+        });
+    });
+
+    function updateStarDisplay(rating) {
+        stars.forEach(s => {
+            s.classList.toggle('selected', s.getAttribute('data-value') <= rating);
+        });
+    }
+
+    // 2. Add Movie Logic
+    const addBtn = document.getElementById('addMovieBtn');
+    const listContainer = document.getElementById('movieList');
+
+    addBtn.addEventListener('click', () => {
+        const title = document.getElementById('movieTitle').value;
+        const year = document.getElementById('movieYear').value;
+        const genre = document.getElementById('movieGenre').value;
+
+        if(!title || !year || currentRating === 0) {
+            alert("Please fill all fields and set a rating!");
+            return;
+        }
+
+        const newMovie = {
+            title: title,
+            year: year,
+            genre: genre,
+            rating: currentRating
+        };
+
+        // Save to LocalStorage
+        let movies = JSON.parse(localStorage.getItem('movies')) || [];
+        movies.push(newMovie);
+        localStorage.setItem('movies', JSON.stringify(movies));
+
+        // Refresh List & Reset Form
+        renderMovies();
+        resetForm();
+    });
+
+    function resetForm() {
+        document.getElementById('movieTitle').value = '';
+        document.getElementById('movieYear').value = '';
+        currentRating = 0;
+        updateStarDisplay(0);
+    }
+
+    // 3. Render List Logic
+    function renderMovies() {
+        const movies = JSON.parse(localStorage.getItem('movies')) || [];
+        listContainer.innerHTML = '';
+
+        movies.forEach(movie => {
+            const div = document.createElement('div');
+            div.className = 'movie-item';
+            
+            // Create star string for display
+            let starHtml = '';
+            for(let i=1; i<=5; i++) {
+                starHtml += i <= movie.rating ? '<span class="list-star">★</span>' : '<span class="gray-star">★</span>';
+            }
+
+            div.innerHTML = `${movie.title} (${movie.year}) - ${movie.genre}, Rating: ${starHtml}`;
+            listContainer.appendChild(div);
+        });
+    }
+
+    // Initialize list on load
+    renderMovies();
+</script>
 
 </body>
 </html>
