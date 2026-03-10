@@ -258,9 +258,9 @@
     const confirmDelete = confirm(`Are you sure you want to delete "${movie.title}" (${movie.year})?`);
 
     if (confirmDelete) {
-        movies.splice(index, 1); // Remove the movie
+        movies.splice(index, 1); 
         localStorage.setItem('movies', JSON.stringify(movies));
-        renderMovies(); // Refresh the list
+        renderMovies(); 
     }
     }
 
