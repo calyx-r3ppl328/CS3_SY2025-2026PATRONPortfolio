@@ -1,5 +1,7 @@
 function plotPoint(x0, y0, x, y) {
     console.log(x0, y0, x, y) // checks the arguments passed to this function
+    let in1 = document.getElementById('input');
+    let out1 = document.getElementById('output');
     in1.innerHTML = x0 + " " + y0 + " " + x + " " + y;
     var point = document.createElement('div');  
     point.className = 'point';
