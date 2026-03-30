@@ -116,6 +116,12 @@
 
     b. How does absolute positioning depend on its parent element?
 
+      If an object is absolutely positioned, it will be positioned relative to the nearest parent element it has. A parent element is an element that directly contains another element.
+
     c. How do you differentiate sticky from fixed (you can research on sticky)?
+    
+      Fixed positioning refers to the browser viewport. This would mean it would stay at a position as you scroll. Sticky positioning "sticks" them to their parent element, acting as a fixed element until you scroll to a certain position.
 
     d. If you were designing a webpage for a school event, how might you use positioning to highlight important information? Please give concrete examples.
+
+      If I were to design a webpage for a school event, the navigation bar and footer would be fixed, allowing students to click on it to transition to other webpages. For headers for content, I would use sticky positioning, where it sticks until they scroll to the next part, where the next header would be the one stuck. If I need to put text on images (say, a banner), I would use absolute positioning. Relative positioning can be used to overlap certain elements. For example, an element detailing information under a little notice to acknowledge and remind students of certain reminders and warnings.
